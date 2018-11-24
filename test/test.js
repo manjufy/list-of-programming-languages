@@ -1,5 +1,5 @@
-var data = require('..');
-var assert = require('assert');
+const data = require('..');
+const assert = require('assert');
 
 describe('list-of-programming-languages', function() {
   it('should be available as a JS object', function() {

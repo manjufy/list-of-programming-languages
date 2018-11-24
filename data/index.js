@@ -1,22 +1,22 @@
-var request = require('request');
-var fs = require('fs');
-var url = require('url');
-var ml = require('./ml');
-var cheerio = require('cheerio');
-var uniqBy = require('lodash/uniqBy');
+const request = require('request');
+const fs = require('fs');
+const url = require('url');
+const ml = require('./ml');
+const cheerio = require('cheerio');
+const uniqBy = require('lodash/uniqBy');
 
-var packageJson = require('../package');
+const packageJson = require('../package');
 
-var lplUrl = 'http://en.wikipedia.org/wiki/List_of_programming_languages';
-var plplUrl = url.parse(lplUrl);
+const lplUrl = 'http://en.wikipedia.org/wiki/List_of_programming_languages';
+const plplUrl = url.parse(lplUrl);
 
 request.get(lplUrl, function(err, resp, body) {
   if (err) return console.err(err);
 
-  var html = body.toString();
-  var $ = cheerio.load(html);
+  const html = body.toString();
+  const $ = cheerio.load(html);
 
-  var list = {
+  const list = {
     '@context': 'http://schema.org',
     '@type': ['ItemList', 'CreativeWork'],
     'inLanguage': 'English',
@@ -30,7 +30,7 @@ request.get(lplUrl, function(err, resp, body) {
   };
 
   $('h2 ~ .div-col li a').each(function(i) {
-    var $a = $(this);
+    const $a = $(this);
     list.itemListElement.push({
       "@type": 'ListItem',
       item: {
